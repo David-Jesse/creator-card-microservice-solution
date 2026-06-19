@@ -173,4 +173,4 @@ npm run test:e2e
 
 Submit the **base URL only** (e.g. `https://creator-card-api.onrender.com`) —
 the graders call `POST /creator-cards`, `GET /creator-cards/:slug`, and
-`DELETE /creator-cards/:slug` against it.
+`DELETE /creator-cards/:slug` against it
