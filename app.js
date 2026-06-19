@@ -73,25 +73,35 @@ if (canLogEndpointInformation) {
 }
 
 function setupEndpointHandlers(basePath, options = {}) {
-  console.log('LOADER basePath=', basePath);
+  console.log('[LOADER] basePath=', JSON.stringify(basePath));
+
   let dirs;
   try {
     dirs = fs.readdirSync(basePath);
-    console.log('LOADER found files:', dirs);
   } catch (e) {
-    console.log('LOADER readdirSync FAILED:', e.message);
+    console.log('[LOADER] readdirSync FAILED:', e.message);
     return;
   }
+  console.log('[LOADER] found files:', dirs);
 
   dirs.forEach((file) => {
+    const fullPath = `${basePath}${file}`;
+    console.log('[LOADER] requiring:', fullPath);
+
     let handler;
     try {
-      handler = require(`${basePath}${file}`);
-      console.log('LOADER registered:', handler.method, handler.path);
+      handler = require(fullPath);
     } catch (e) {
-      console.log('LOADER require FAILED for', file, ':', e.message);
+      console.log('[LOADER] require FAILED:', e.message);
       return;
     }
+
+    if (options.pathPrefix) {
+      handler.path = `${options.pathPrefix}${handler.path}`;
+    }
+
+    console.log('[LOADER] registering:', handler.method, handler.path);
+    server.addHandler(handler);
   });
 }
 
