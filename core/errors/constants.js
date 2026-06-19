@@ -1,0 +1,48 @@
+/**
+ * @readonly
+ * @enum
+ */
+const ERROR_CODE = {
+  AUTHERR: 'AUTHORIZATION_ERROR',
+  NOAUTHERR: 'MISSING_AUTHORIZATION',
+  INVLDAUTHTOKEN: 'INVALID_AUTH_TOKEN',
+  INACTIVEACCT: 'INACTIVE_ACCOUNT',
+  EXPIREDTOKEN: 'EXPIRED_TOKEN',
+  INVLDREQ: 'INVALID_REQUEST',
+  PERMERR: 'PERMISSION_ERROR',
+  LIMITERR: 'LIMIT_ERROR',
+  FEEERR: 'FEE_ERROR',
+  NOTFOUND: 'RESOURCE_NOT_FOUND',
+  APPERR: 'APPLICATION_ERROR',
+  HTTPREQERR: 'INTERNAL_REQ_ERROR',
+  DUPLRCRD: 'DUPLICATE_RECORD',
+  VALIDATIONERR: 'VALIDATION_ERROR',
+  INVLDDATA: 'INVALID_REQUEST_DATA',
+  RTLIMERR: 'RATE_LIMIT_ERROR',
+};
+
+const ERROR_STATUS_CODE_MAPPING = {
+  AUTHORIZATION_ERROR: 401,
+  MISSING_AUTHORIZATION: 401,
+  INVALID_AUTH_TOKEN: 401,
+  INACTIVE_ACCOUNT: 401,
+  EXPIRED_TOKEN: 401,
+  PERMISSION_ERROR: 401,
+  INVALID_REQUEST: 403,
+  LIMIT_ERROR: 403,
+  FEE_ERROR: 403,
+  RESOURCE_NOT_FOUND: 404,
+  DUPLICATE_RECORD: 409,
+  APPLICATION_ERROR: 500,
+  RATE_LIMIT_ERROR: 429,
+  // Creator Card custom business-rule codes (additive; default would be 400)
+  SL02: 400, // slug already taken
+  AC01: 400, // access_code required for private cards
+  AC05: 400, // access_code not allowed on public cards
+  NF01: 404, // card with slug does not exist
+  NF02: 404, // card exists but is a draft
+  AC03: 403, // access code required to view private card
+  AC04: 403, // invalid access code
+};
+
+module.exports = { ERROR_CODE, ERROR_STATUS_CODE_MAPPING };

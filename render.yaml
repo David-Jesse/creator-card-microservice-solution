@@ -1,0 +1,19 @@
+# Render deployment blueprint for the Creator Card microservice.
+# Render automatically injects the PORT env var (the server reads process.env.PORT),
+# so it is intentionally NOT hard-coded here.
+#
+# After connecting the repo, set MONGODB_URI in the Render dashboard (or here via
+# the dashboard secret) to your MongoDB Atlas connection string.
+services:
+  - type: web
+    name: creator-card-api
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: node bootstrap.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # set this secret in the Render dashboard
