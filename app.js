@@ -93,8 +93,13 @@ function setupEndpointHandlers(basePath, options = {}) {
       return;
     }
 
-ENDPOINT_CONFIGS.forEach((config) => {
-  setupEndpointHandlers(config.path, config.options);
-});
+    const ENDPOINT_CONFIGS = [
+      {
+        path: path.join(__dirname, 'endpoints', 'onboarding') + path.sep,
+      },
+      {
+        path: path.join(__dirname, 'endpoints', 'creator-cards') + path.sep,
+      },
+    ];
 
 server.startServer();
