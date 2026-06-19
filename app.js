@@ -92,14 +92,17 @@ function setupEndpointHandlers(basePath, options = {}) {
       console.log('LOADER require FAILED for', file, ':', e.message);
       return;
     }
+  });
+}
 
-    const ENDPOINT_CONFIGS = [
-      {
-        path: path.join(__dirname, 'endpoints', 'onboarding') + path.sep,
-      },
-      {
-        path: path.join(__dirname, 'endpoints', 'creator-cards') + path.sep,
-      },
-    ];
+const ENDPOINT_CONFIGS_ALT = [
+  {
+    path: path.join(__dirname, 'endpoints', 'onboarding') + path.sep,
+  },
+  {
+    path: path.join(__dirname, 'endpoints', 'creator-cards') + path.sep,
+  },
+];
+
 
 server.startServer();
