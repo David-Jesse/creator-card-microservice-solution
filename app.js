@@ -6,6 +6,7 @@ const fs = require('fs');
 const { createServer } = require('@app-core/server');
 const { createConnection } = require('@app-core/mongoose');
 const { createQueue } = require('@app-core/queue');
+const path = require('path');
 
 const canLogEndpointInformation = process.env.CAN_LOG_ENDPOINT_INFORMATION;
 
@@ -23,10 +24,10 @@ const server = createServer({
 
 const ENDPOINT_CONFIGS = [
   {
-    path: './endpoints/onboarding/',
+    path: path.join(__dirname, 'endpoints/onboarding/'),
   },
   {
-    path: './endpoints/creator-cards/',
+    path: path.join(__dirname, 'endpoints/creator-cards/'),
   },
 ];
 
