@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+﻿/* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 if (!process.env.__ALREADY_BOOTSTRAPPED_ENVS) require('dotenv').config();
 
@@ -24,10 +24,10 @@ const server = createServer({
 
 const ENDPOINT_CONFIGS = [
   {
-    path: path.join(__dirname, 'endpoints/onboarding/') + path.sep,
+    path: path.join(__dirname, 'endpoints/onboarding/'),
   },
   {
-    path: path.join(__dirname, 'endpoints/creator-cards/') + path.sep,
+    path: path.join(__dirname, 'endpoints/creator-cards/'),
   },
 ];
 
@@ -105,8 +105,14 @@ function setupEndpointHandlers(basePath, options = {}) {
   });
 }
 
-ENDPOINT_CONFIGS.forEach((config) => {
-  setupEndpointHandlers(config.path, config.options);
-});
+const ENDPOINT_CONFIGS_ALT = [
+  {
+    path: path.join(__dirname, 'endpoints', 'onboarding') + path.sep,
+  },
+  {
+    path: path.join(__dirname, 'endpoints', 'creator-cards') + path.sep,
+  },
+];
+
 
 server.startServer();
